@@ -5,10 +5,14 @@
   "dependencies": {
     "enzyme": "^3.7.0",
     "enzyme-adapter-react-16": "^1.7.0",
+    "poker-hands": "^1.0.2",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
+    "react-redux": "^6.0.0",
     "react-scripts": "2.0.4",
     "react-test-renderer": "^16.6.3",
+    "redux": "^4.0.1",
+    "redux-logger": "^3.0.6",
     "styled-components": "^4.1.1"
   },
   "scripts": {
@@ -25,5 +29,5 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-	]
+  ]
 }

@@ -4,13 +4,13 @@ import { suits, values } from "../utils";
 
 import Layout from "./Layout";
 import Deck from "./Deck";
-import { Card, PlayerHand, Button, Footer } from "../Styles/Styled";
-
+import { Button, Footer } from "../Styles/Styled";
+import Players from "./Players";
+import { connect } from 'react-redux';
 class App extends Component {
 	render() {
 		return (
 				<Layout>
-
 					<section>
 						<h1>
 						Cards deck
@@ -22,73 +22,14 @@ class App extends Component {
 							<h1>Players</h1>
 						</header>
 						<section>
-							<article>
-								<p>
-									Player 1 name
-									<Button>
-										<span role="img" alt="pencil" aria-label="pencil">✏️</span>
-										Edit
-									</Button>
-									<Button>
-										<span role="img" alt="flame" aria-label="flame">🔥</span>
-										Remove
-									</Button>
-								</p>
-								<PlayerHand>
-										<Card suit="D" value="A" selected={true}>
-											A
-										</Card>
-										<Card suit="D" value="K">
-											K
-										</Card>
-										<Card suit="D" value="Q">
-											Q
-										</Card>
-										<Card suit="D" value="J">
-											J
-										</Card>
-										<Card suit="D" value="T">
-											T
-										</Card>
-								</PlayerHand>
-							</article>
-							<article>
-								<p>
-									Player 2 name
-									<Button>
-										<span role="img" alt="pencil" aria-label="pencil">✏️</span>
-										Edit
-									</Button>
-									<Button>
-										<span role="img" alt="flame" aria-label="flame">🔥</span>
-										Remove
-									</Button>
-								</p>
-								<PlayerHand>
-										<Card suit="S" value="A">
-											A
-										</Card>
-										<Card suit="S" value="K">
-											K
-										</Card>
-										<Card suit="S" value="Q" selected={true}>
-											Q
-										</Card>
-										<Card suit="S" value="J">
-											J
-										</Card>
-										<Card suit="S" value="T">
-											T
-										</Card>
-								</PlayerHand>
-							</article>
+							<Players players={this.props.game.players} removePlayer={this.props.deletePlayer}/>
 						</section>
 						<Footer>
-								<Button>
+								<Button onClick={() => this.props.addPlayer(this.props.game)}>
 									<span role="img" alt="woman raising hand" aria-label="woman raising hand">🙋‍♀️</span>
 									Add new player
 								</Button>
-								<Button>
+								<Button onClick={() => this.props.findWinner(this.props.game.players)}>
 									<span role="img" alt="trophy" aria-label="trophy">🏆</span>
 									Find the winner
 								</Button>
@@ -99,5 +40,34 @@ class App extends Component {
 		);
 	}
 }
+const mapStateToProps = (state) => {
+	return {
+		game: state
+	}
+}
 
-export default App;
+const mapDispatchToProps = (dispatch) => {
+	return {
+		findWinner: (players) => {
+			dispatch({
+				type: 'FIND_WINNER',
+				payload: players
+			})
+		},
+		addPlayer: (game) => {
+			dispatch({
+				type: 'ADD_PLAYER',
+				payload: game
+			})
+		},
+		deletePlayer: (name) => {
+			dispatch({
+				type: 'DELETE_PLAYER',
+				payload: name
+			})
+		}
+	}
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
+// export default App;

@@ -1,5 +1,8 @@
 # Grabyo Poker
-
+Remove Player
+Add Player
+Find Winner
+Dynamic Load of Deck
 ## Instructions
 
 You need to create a poker application. The user interface is already built and your goal is it to make the whole thing functional.
